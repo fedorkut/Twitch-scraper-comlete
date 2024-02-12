@@ -25,26 +25,10 @@ soup = BeautifulSoup(driver.page_source, 'html.parser')
 # Find and print all hyperlinks from the "about" section
 
 
- login_button = driver.find_element(By.CSS_SELECTOR, "button.ScCoreButtonPrimary-sc-ocjdkq-1")
-    login_button.click()
-
-
 links = soup.find_all('a')
 urls = [link.get('href') for link in links if link.get('href') and (link.get('href').startswith('http') or link.get('href').startswith('https'))]
 for url in urls:
     print(url)
 
-following_button = driver.find_element(By.LINK_TEXT, "Following")
-following_button.click()
 
-following_button = driver.find_element(By.LINK_TEXT, "Channels")
-following_button.click()
-
-
-
-# Navigate to the "following" page (assuming there's a direct link or button)
-# This will depend on the actual structure of the page; you might need to adjust the selector
-# Repeat a similar process to navigate to the "channels" page
-
-# Close the browser once donep
 driver.quit()

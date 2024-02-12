@@ -1,0 +1,50 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.firefox import GeckoDriverManager
+import pyautogui
+from time import sleep
+
+def setup_driver():
+    service = Service(GeckoDriverManager().install())
+    driver = webdriver.Firefox(service=service)
+    return driver
+
+def main():
+    driver = setup_driver()
+
+    driver.get("https://www.twitch.tv/directory/following")  # Navigating directly to the login page
+
+    # Wait for the login form to be loaded
+
+    # Corrected selectors based on your confirmation that 'data-a-target' values are correct
+    username_field = driver.find_element(By.ID, "login-username")
+    password_field = driver.find_element(By.ID, "password-input")
+
+    # Use secure methods to get these values
+    username = "fedorisworking"  # Replace with your username
+    password = "Covcheg2408!"  # Replace with your password
+    username_field.send_keys(username)
+    password_field.send_keys(password)
+
+    WebDriverWait(driver, 3)
+
+    pyautogui.press('enter')
+
+
+    
+    driver.quit 
+
+
+    
+
+
+
+   
+
+    # Further actions...
+
+if __name__ == "__main__":
+    main()

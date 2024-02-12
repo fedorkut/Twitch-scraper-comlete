@@ -1,0 +1,50 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.firefox.service import Service
+from webdriver_manager.firefox import GeckoDriverManager
+from bs4 import BeautifulSoup
+
+# Initialize Selenium WebDriver for Firefox using webdriver_manager
+driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
+
+
+# Initialize Selenium WebDriver
+driver = webdriver.Firefox(service=Service(geckodriver().install()))
+
+# Navigate to the "about" page on Twitch
+url = 'https://m.twitch.tv/quin69/about'
+driver.get(url)
+
+# Wait for the page to load dynamically (Optional: use explicit waits for better reliability)
+driver.implicitly_wait(10)  # Adjust the wait time as necessary
+
+# Get page source and parse with BeautifulSoup
+soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+# Find and print all hyperlinks from the "about" section
+
+
+ login_button = driver.find_element(By.CSS_SELECTOR, "button.ScCoreButtonPrimary-sc-ocjdkq-1")
+    login_button.click()
+
+
+links = soup.find_all('a')
+urls = [link.get('href') for link in links if link.get('href') and (link.get('href').startswith('http') or link.get('href').startswith('https'))]
+for url in urls:
+    print(url)
+
+following_button = driver.find_element(By.LINK_TEXT, "Following")
+following_button.click()
+
+following_button = driver.find_element(By.LINK_TEXT, "Channels")
+following_button.click()
+
+
+
+# Navigate to the "following" page (assuming there's a direct link or button)
+# This will depend on the actual structure of the page; you might need to adjust the selector
+# Repeat a similar process to navigate to the "channels" page
+
+# Close the browser once donep
+driver.quit()
